@@ -34,6 +34,7 @@ export const register = creds => dispatch => {
         axiosWithAuth()
             .post(`https://usemytechstuff.herokuapp.com/api/auth/register`, creds)
             .then(res => {
+                console.log("This", res)
                 dispatch({ type: REGISTER_SUCCESS});
                 return true;
             })

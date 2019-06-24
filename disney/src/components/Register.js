@@ -22,7 +22,7 @@ class Register extends React.Component {
 
     register = e => {
         e.preventDefault();
-        this.props.loggingIn(this.state);
+        this.props.register(this.state);
         this.setState({
             username: "",
             password: "",
