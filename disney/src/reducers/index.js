@@ -12,8 +12,7 @@ import {
      loggingIn: false,
      error: null
    }
-  
-   export const disneyReducer = (state = initialState , action) => {
+const disneyReducer = (state = initialState , action) => {
     switch (action.type) {
         case LOGIN_START: 
         return {
@@ -59,3 +58,5 @@ import {
           return state;
   }
   }
+
+  export default disneyReducer;
