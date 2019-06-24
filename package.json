@@ -1,0 +1,8 @@
+{
+  "name": "build-week-2-frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/disney-parent/Front-End.git",
+  "author": "justiny2c <justiny2c@gmail.com>",
+  "license": "MIT"
+}
