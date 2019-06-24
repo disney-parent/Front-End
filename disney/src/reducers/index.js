@@ -1,7 +1,10 @@
 import {
     LOGIN_START,
     LOGIN_SUCCESS,
-    LOGIN_FAILURE
+    LOGIN_FAILURE,
+    REGISTER_START,
+    REGISTER_SUCCESS,
+    REGISTER_FAILURE
     } from "../actions"
   
   const initialState = {
@@ -30,6 +33,28 @@ import {
                 error: action.payload,
                 loggingIn: false
             }
+        case REGISTER_START: {
+            return {
+                ...state,
+                error: "",
+                // fetchingFriends: true
+            }
+        }
+        case REGISTER_SUCCESS: {
+            return {
+                ...state,
+                error: "",
+                // fetchingFriends: false,
+                // friends: action.payload
+            }
+        }
+        case REGISTER_FAILURE: {
+            return {
+                ...state,
+                // fetchingFriends: false,
+                // error: action.payload
+            }
+        }    
       default:
           return state;
   }
