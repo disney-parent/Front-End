@@ -1,5 +1,5 @@
 import React from "react"
-import "./Register.css";
+import "./main.css";
 import { connect } from "react-redux";
 import { register } from "../actions"
 
@@ -33,7 +33,7 @@ class Register extends React.Component {
 
     render(){
         return (
-            <div>
+            <div className="input-form">
                 <input 
                     placeholder="Username" 
                     onChange={this.handleChange}

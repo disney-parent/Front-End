@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 // import { axiosWithAuth } from "../utils/axiosWithAuth"
 
 export const LOGIN_START = 'LOGIN_START';
@@ -9,11 +10,11 @@ export const loggingIn = creds => dispatch => {
     dispatch({ type: LOGIN_START });
     return (
         axios
-            // .post(`https://usemytechstuff.herokuapp.com/api/auth/login`, creds)
             .post(`https://disneyparent-backend.herokuapp.com/auth/parents/login`, creds)
             .then(res => {
                 console.log("My toe", res.data)
                 localStorage.setItem("token", res.data.token);
+                // localStorage.setItem("parent_id", 1);
                 dispatch({ type: LOGIN_SUCCESS});
                 return true;
             })
@@ -34,7 +35,6 @@ export const register = creds => dispatch => {
     dispatch({ type: REGISTER_START });
     return (
         axios
-            // .post(`https://usemytechstuff.herokuapp.com/api/auth/register`, creds)
             .post(`https://disneyparent-backend.herokuapp.com/auth/parents/register`, creds)
             .then(res => {
                 console.log("This", res)
@@ -59,7 +59,6 @@ export const fetchPosts = () => dispatch => {
         axios
             .get(`https://disneyparent-backend.herokuapp.com/posts`)
             .then(res => {
-                console.log("RES", res)
                 dispatch({ type: FETCH_SUCCESS, payload: res.data})
             })
             .catch(err => {
@@ -77,14 +76,17 @@ export const POST_FAILURE = "POST_FAILURE";
 export const postPost = postInfo => dispatch => {
     dispatch({ type: POST_START });
     return ( 
+        // axiosWithAuth
         axios
-            .post(`https://disneyparent-backend.herokuapp.com/posts`, postInfo)
+            .post(`https://disneyparent-backend.herokuapp.com/auth/parents/login`, postInfo)
+            // {headers: 
+            //     { Authorization: localStorage.getItem("token") }}, postInfo)
             .then(res => {
                 console.log("Posted data", res)
                 dispatch({ type: POST_SUCCESS, payload: res.data})
             })
             .catch(err => {
-                console.log(err)
+                console.log("My error", err)
                 dispatch({ type: POST_FAILURE, payload: err})
             
             })

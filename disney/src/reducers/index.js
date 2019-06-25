@@ -42,22 +42,19 @@ const disneyReducer = (state = initialState , action) => {
             return {
                 ...state,
                 error: "",
-                // fetchingFriends: true
             }
         }
         case REGISTER_SUCCESS: {
             return {
                 ...state,
                 error: "",
-                // fetchingFriends: false,
-                // friends: action.payload
+                // posts: action.payload
             }
         }
         case REGISTER_FAILURE: {
             return {
                 ...state,
-                // fetchingFriends: false,
-                // error: action.payload
+                error: action.payload
             }
         }
         case FETCH_START: {

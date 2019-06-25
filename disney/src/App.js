@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      {/* <Login /> */}
+      <Route exact path = "/login" component={Login} />
       <Route exact path = "/register" component={Register} />
       <Route exact path = "/" component={Content}/>
 

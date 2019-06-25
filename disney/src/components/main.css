@@ -1,0 +1,14 @@
+.input-form {
+    display: flex;
+    flex: column wrap;
+    justify-content: center
+}
+
+input {
+    padding: 10px;
+}
+
+.nav-bar {
+    height: 15%;
+    margin: 20px 0;
+}

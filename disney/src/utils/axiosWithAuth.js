@@ -8,6 +8,6 @@ export const axiosWithAuth = () => {
             Authorization: token
 
         },
-        baseURL: 'https://usemytechstuff.herokuapp.com/api/auth/'
+        baseURL: 'https://disneyparent-backend.herokuapp.com'
     })
 }

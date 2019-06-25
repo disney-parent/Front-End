@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import "./main.css";
 import { connect } from "react-redux";
 import { loggingIn } from "../actions"
 
@@ -31,19 +32,17 @@ class Login extends React.Component {
     }
     render(){
         return (
-            <div>
+            <div className="input-form">
                 <input 
                     placeholder="Username" 
                     onChange={this.handleChange}
                     value={this.state.username}
                     name="username"/>
-
                 <input
                     placeholder="Password"
                     onChange={this.handleChange}
                     value={this.state.password}
                     name="password" />
-
                 <input
                     placeholder="Email"
                     onChange={this.handleChange}
