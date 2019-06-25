@@ -10,6 +10,7 @@ class Login extends React.Component {
 
         username: "",
         password: "",
+        accountType: ""
 
         
     }
@@ -25,6 +26,7 @@ class Login extends React.Component {
         this.setState({
             username: "",
             password: "",
+            accountType: ""
         })
     }
     render(){
@@ -47,6 +49,11 @@ class Login extends React.Component {
                     onChange={this.handleChange}
                     value={this.state.email}
                     name="email" />
+                <input
+                    placeholder="Account type"
+                    onChange={this.handleChange}
+                    value={this.state.accountType}
+                    name="accountType" />
                 
                 <button
                     onClick={this.loggingIn}>Login</button>
@@ -54,7 +61,7 @@ class Login extends React.Component {
 
             </div>
         )
-        
+
 
     }
 }
