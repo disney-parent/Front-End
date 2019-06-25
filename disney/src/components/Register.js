@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { register } from "../actions"
 
 
-
-
 class Register extends React.Component {
     state = {
 
