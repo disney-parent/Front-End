@@ -1,6 +1,7 @@
-import React from "react"
-// import { connect } from "react-redux";
-// import { loggingIn } from "../actions"
+import React from "react";
+import "./main.css";
+import { connect } from "react-redux";
+import { loggingIn } from "../actions"
 
 
 
@@ -10,6 +11,7 @@ class Login extends React.Component {
 
         username: "",
         password: "",
+        accountType: ""
 
         
     }
@@ -25,22 +27,32 @@ class Login extends React.Component {
         this.setState({
             username: "",
             password: "",
+            accountType: ""
         })
     }
     render(){
         return (
-            <div>
+            <div className="input-form">
                 <input 
                     placeholder="Username" 
                     onChange={this.handleChange}
                     value={this.state.username}
                     name="username"/>
-
                 <input
                     placeholder="Password"
                     onChange={this.handleChange}
                     value={this.state.password}
                     name="password" />
+                <input
+                    placeholder="Email"
+                    onChange={this.handleChange}
+                    value={this.state.email}
+                    name="email" />
+                <input
+                    placeholder="Account type"
+                    onChange={this.handleChange}
+                    value={this.state.accountType}
+                    name="accountType" />
                 
                 <button
                     onClick={this.loggingIn}>Login</button>
@@ -49,18 +61,16 @@ class Login extends React.Component {
             </div>
         )
 
+
     }
 }
 
 
-// const mapStateToProps = state => ({
-//     loggingIn: state.loggingIn,
-//     error: state.error
-// })
+
+function mapStateToProps(state){
+    return {} 
+};
 
 
-// export default connect (
-//     mapStateToProps,
-//     { loggingIn }
-// )(Login);
-export default Login
+
+export default connect (mapStateToProps, { loggingIn })(Login)

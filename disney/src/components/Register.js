@@ -1,8 +1,7 @@
 import React from "react"
+import "./main.css";
 import { connect } from "react-redux";
 import { register } from "../actions"
-
-
 
 
 class Register extends React.Component {
@@ -10,7 +9,8 @@ class Register extends React.Component {
 
         username: "",
         password: "",
-        email: ""
+        email: "",
+        accountType: ""
 
         
     }
@@ -22,17 +22,18 @@ class Register extends React.Component {
 
     register = e => {
         e.preventDefault();
-        this.props.loggingIn(this.state);
+        this.props.register(this.state);
         this.setState({
             username: "",
             password: "",
-            email: ""
+            email: "",
+            accountType: ''
         })
     }
 
     render(){
         return (
-            <div>
+            <div className="input-form">
                 <input 
                     placeholder="Username" 
                     onChange={this.handleChange}
@@ -49,6 +50,11 @@ class Register extends React.Component {
                     onChange={this.handleChange}
                     value={this.state.email}
                     name="email" />
+                <input
+                    placeholder="Account type"
+                    onChange={this.handleChange}
+                    value={this.state.accountType}
+                    name="accountType" />
                 
                 <button
                     onClick={this.register}>Register</button>
