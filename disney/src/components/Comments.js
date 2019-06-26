@@ -1,59 +1,74 @@
 import React from "react"
 import { connect } from "react-redux";
-import { fetchPosts, postPost, fetchComments } from "../actions";
+import { fetchPosts, fetchComments } from "../actions";
 import Castle from "./Castle.jpg";
 import { Link } from "react-router-dom";
 
 
 
-class Content extends React.Component {
+class Comments extends React.Component {
     state = {
-        title: "",
-        attraction: "",
-        children: "",
-        time: "",
-        parent_id: 1,
-
+        comments:[]
     }
 
     componentDidMount(){
         this.props.fetchPosts()
         this.props.fetchComments()
     }
-
-    handleChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value 
-        })
-    }
-
-    postPost = e => {
-        e.preventDefault();
-        this.props.postPost(this.state);
-        this.setState({
-            title: "",
-            attraction: "",
-            children: "",
-            time: ""
-        })
-    }
+    // handleChange = e => {
+    //     this.setState({
+    //         [e.target.name]: e.target.value 
+    //     })
+    // }
 
     render(){
+    
+    
+
+    const id = this.props.match.params.id;
+
+    const post= this.props.posts.find(post=> `${post.id}` === id)
+        
+    const comments=this.props.comments.filter(comments => `${comments.post_id}` === id)
+
+    const test = [1 ,2, 3]
+
+    console.log("Hey Jamie, comment:", comments)
+
+    if (!post){
+        return(
+            <h1>Loading...</h1>
+        )
+    }
+            
         return (
             <div className = "mainpage">
                 <img src={Castle} alt="Disney Castle" />
 
-                {this.props.posts.map(post => (
-                    <Link to={`/posts/${post.id}`}>
-                        <div className ="post">
+               
+                        <div className ="comments-post">
                             <h3>{post.title}</h3>
                             <h5>@ {post.attraction}</h5>
                             <h6>{post.time}</h6>
                             <h6>{post.children} kids</h6>
                         </div>
-                    </Link>
 
-                ))}
+                        {comments.map(commentObj => (
+                            
+                            <div>
+                                <p>{commentObj.username}</p>
+                                <p>{commentObj.comment}</p>
+                            </div>
+                        ))}
+
+                        {test.map(testObj => (
+                            
+                            <div>
+                                <p>{testObj}</p>
+                            </div>
+                        ))}
+
+                        
 
             <div className="post-form">
                 <input 
@@ -90,8 +105,10 @@ class Content extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        posts: state.posts
+        ...state,
+        posts: state.posts,
+        comments: state.comments,
     }
 }
 
-export default connect(mapStateToProps, {fetchPosts, postPost, fetchComments})(Content)
+export default connect(mapStateToProps, {fetchPosts, fetchComments})(Comments)
