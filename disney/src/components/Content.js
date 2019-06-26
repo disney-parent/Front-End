@@ -1,6 +1,8 @@
 import React from "react"
 import { connect } from "react-redux";
-import { fetchPosts, postPost } from "../actions"
+import { fetchPosts, postPost, fetchComments } from "../actions";
+import Castle from "./Castle.jpg";
+import { Link } from "react-router-dom";
 
 
 
@@ -10,12 +12,13 @@ class Content extends React.Component {
         attraction: "",
         children: "",
         time: "",
-        // parent_id: 1,
+        parent_id: 1,
 
     }
 
     componentDidMount(){
         this.props.fetchPosts()
+        this.props.fetchComments()
     }
 
     handleChange = e => {
@@ -37,17 +40,22 @@ class Content extends React.Component {
 
     render(){
         return (
-            <div>
+            <div className = "mainpage">
+                <img src={Castle} alt="Disney Castle" />
 
                 {this.props.posts.map(post => (
-                    <div className ="post">
-                        <h3>{post.title}</h3>
-                        <h5>Location: {post.attraction}</h5>
-                    </div>
+                    <Link to={`/posts/${post.id}`}>
+                        <div className ="post">
+                            <h3>{post.title}</h3>
+                            <h5>@ {post.attraction}</h5>
+                            <h6>{post.time}</h6>
+                            <h6>{post.children} kids</h6>
+                        </div>
+                    </Link>
 
                 ))}
 
-            <div>
+            <div className="post-form">
                 <input 
                     placeholder="Title" 
                     onChange={this.handleChange}
@@ -86,4 +94,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {fetchPosts, postPost})(Content)
+export default connect(mapStateToProps, {fetchPosts, postPost, fetchComments})(Content)

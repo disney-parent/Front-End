@@ -6,16 +6,18 @@ export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-export const loggingIn = creds => dispatch => {
+export const loggingIn = (creds, username) => dispatch => {
     dispatch({ type: LOGIN_START });
+
+    console.log(username)
     return (
         axios
             .post(`https://disneyparent-backend.herokuapp.com/auth/parents/login`, creds)
             .then(res => {
                 console.log("My toe", res.data)
                 localStorage.setItem("token", res.data.token);
-                // localStorage.setItem("parent_id", 1);
-                dispatch({ type: LOGIN_SUCCESS});
+                localStorage.setItem("username", username);
+                dispatch({ type: LOGIN_SUCCESS, payload:username});
                 return true;
             })
             .catch(err => {
@@ -37,32 +39,31 @@ export const register = creds => dispatch => {
         axios
             .post(`https://disneyparent-backend.herokuapp.com/auth/parents/register`, creds)
             .then(res => {
-                console.log("This", res)
                 dispatch({ type: REGISTER_SUCCESS});
                 return true;
             })
             .catch(err => {
-                // console.log(err)
                 dispatch ({ type: REGISTER_FAILURE, payload: err});
                 return err.response
             })
     )
 }
 
-export const FETCH_START = "FETCH_START";
-export const FETCH_SUCCESS = "FETCH_SUCCESS";
-export const FETCH_FAILURE = "FETCH_FAILURE";
+export const FETCH_COMMENT_START = "FETCH_COMMENT_START";
+export const FETCH_COMMENT_SUCCESS = "FETCH_COMMENT_SUCCESS";
+export const FETCH_COMMENT_FAILURE = "FETCH_COMMENT_FAILURE";
 
-export const fetchPosts = () => dispatch => {
-    dispatch({ type: FETCH_START });
+export const fetchComments = () => dispatch => {
+    dispatch({ type: FETCH_COMMENT_START });
     return ( 
         axios
-            .get(`https://disneyparent-backend.herokuapp.com/posts`)
+            .get(`https://disneyparent-backend.herokuapp.com/comments`)
             .then(res => {
-                dispatch({ type: FETCH_SUCCESS, payload: res.data})
+                console.log("THIS IS COMMENTS:", res)
+                dispatch({ type: FETCH_COMMENT_SUCCESS, payload: res.data})
             })
             .catch(err => {
-                dispatch({ type: FETCH_FAILURE, payload: err})
+                dispatch({ type: FETCH_COMMENT_FAILURE, payload: err})
             
             })
     )
@@ -78,19 +79,54 @@ export const postPost = postInfo => dispatch => {
     return ( 
         // axiosWithAuth
         axios
-            .post(`https://disneyparent-backend.herokuapp.com/auth/parents/login`, postInfo)
+            .post(`https://disneyparent-backend.herokuapp.com/posts`, postInfo)
             // {headers: 
             //     { Authorization: localStorage.getItem("token") }}, postInfo)
             .then(res => {
-                console.log("Posted data", res)
                 dispatch({ type: POST_SUCCESS, payload: res.data})
             })
             .catch(err => {
-                console.log("My error", err)
-                dispatch({ type: POST_FAILURE, payload: err})
+                dispatch({ type: POST_FAILURE, payload: err})            
+            })
+    )
+}
+
+export const COMMENT_START = "COMMENT_START";
+export const COMMENT_SUCCESS = "COMMENT_SUCCESS";
+export const COMMENT_FAILURE = "COMMENT_FAILURE";
+
+export const postComment = comment => dispatch => {
+    dispatch({ type: COMMENT_START });
+    console.log("Checking comment", comment)
+    return ( 
+        axios
+            .post(`https://disneyparent-backend.herokuapp.com/comments`, comment)
+            .then(res => {
+                dispatch({ type: COMMENT_SUCCESS, payload: res.data})
+            })
+            .catch(err => {
+                dispatch({ type: COMMENT_FAILURE, payload: err})
             
             })
     )
 
 }
 
+export const FETCH_START = "FETCH_START";
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
+export const FETCH_FAILURE = "FETCH_FAILURE";
+
+export const fetchPosts = () => dispatch => {
+    dispatch({ type: FETCH_START });
+    return ( 
+        axios
+            .get(`https://disneyparent-backend.herokuapp.com/posts`)
+            .then(res => {
+                dispatch({ type: FETCH_SUCCESS, payload: res.data})
+            })
+            .catch(err => {
+                dispatch({ type: FETCH_FAILURE, payload: err})            
+            })
+    )
+
+}

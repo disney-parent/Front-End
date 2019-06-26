@@ -23,12 +23,13 @@ class Login extends React.Component {
 
     loggingIn = e => {
         e.preventDefault();
-        this.props.loggingIn(this.state);
+        this.props.loggingIn(this.state, this.state.username);
         this.setState({
             username: "",
             password: "",
             accountType: ""
         })
+        this.props.history.push('/');
     }
     render(){
         return (

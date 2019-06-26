@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  margin: 0 20%;
+  font-family: 'Didot', serif;
 }
 
 a {
@@ -8,4 +10,12 @@ a {
 a:visited { 
   text-decoration: none; 
   color:black; 
+}
+
+button {
+  font-family: 'Didot', serif;
+}
+
+input {
+  font-family: 'Didot', serif;
 }
