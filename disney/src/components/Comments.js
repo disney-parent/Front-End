@@ -1,28 +1,48 @@
 import React from "react"
 import { connect } from "react-redux";
-import { fetchPosts, fetchComments } from "../actions";
+import { fetchPosts, fetchComments, postComment } from "../actions";
 import Castle from "./Castle.jpg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 
 
 class Comments extends React.Component {
     state = {
-        comments:[]
+        comments:[],
+        username: this.props.username,
+        comment: "",
+        id: this.props.match.params.id
     }
 
     componentDidMount(){
         this.props.fetchPosts()
         this.props.fetchComments()
     }
-    // handleChange = e => {
-    //     this.setState({
-    //         [e.target.name]: e.target.value 
-    //     })
-    // }
+    
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value 
+        })
+    }
+
+    postComment = e => {
+        e.preventDefault();
+
+        const newComment = { 
+            username: localStorage.getItem("username"),
+            comment: this.state.comment,
+            post_id: this.state.id
+        }
+
+        this.props.postComment(newComment);
+        this.setState({
+            comment: ''
+        })
+    }
 
     render(){
     
+    console.log("Hi this is username:", this.props.username)
     
 
     const id = this.props.match.params.id;
@@ -31,9 +51,8 @@ class Comments extends React.Component {
         
     const comments=this.props.comments.filter(comments => `${comments.post_id}` === id)
 
-    const test = [1 ,2, 3]
-
-    console.log("Hey Jamie, comment:", comments)
+    // const test = [1 ,2, 3]
+    // console.log("Hey Jamie, comment:", comments)
 
     if (!post){
         return(
@@ -55,46 +74,23 @@ class Comments extends React.Component {
 
                         {comments.map(commentObj => (
                             
-                            <div>
-                                <p>{commentObj.username}</p>
+                            <div className="comments">
+                                <p className="username">{commentObj.username}</p> 
                                 <p>{commentObj.comment}</p>
-                            </div>
-                        ))}
-
-                        {test.map(testObj => (
-                            
-                            <div>
-                                <p>{testObj}</p>
                             </div>
                         ))}
 
                         
 
-            <div className="post-form">
+            <div className="comment-form">
                 <input 
-                    placeholder="Title" 
+                    placeholder="Add comment..." 
                     onChange={this.handleChange}
-                    value={this.state.title}
-                    name="title"/>
-
-                <input
-                    placeholder="Attraction"
-                    onChange={this.handleChange}
-                    value={this.state.attraction}
-                    name="attraction" />
-                <input
-                    placeholder="# of children"
-                    onChange={this.handleChange}
-                    value={this.state.children}
-                    name="children" />
-                <input
-                    placeholder="Time (ex. 10 a.m. PST)"
-                    onChange={this.handleChange}
-                    value={this.state.time}
-                    name="time" />
+                    value={this.state.comment}
+                    name="comment"/>
                 
                 <button
-                    onClick={this.postPost}>Post</button>
+                    onClick={this.postComment}>Comment</button>
             </div>
 
 
@@ -108,7 +104,8 @@ const mapStateToProps = state => {
         ...state,
         posts: state.posts,
         comments: state.comments,
+        username: state.username
     }
 }
 
-export default connect(mapStateToProps, {fetchPosts, fetchComments})(Comments)
+export default connect(mapStateToProps, { fetchPosts, fetchComments, postComment })(Comments)

@@ -45,4 +45,40 @@ input {
     background-color: rgb(221, 240, 252);
 }
 
+.comments-post {
+    border: 1px solid gray;
+    margin: 10px;
+    margin-top: 25px;
+    height: 100%;
+    background-color: rgb(221, 240, 252);
+    color: black;
+    text-decoration: none;
+}
+
+.comments {
+    display: flex;
+    flex: row;
+    margin-left: 8px;
+}
+.username {
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.comment-form {
+    display: flex;
+    flex: row;
+    margin-left: 8px;
+}
+.comment-form input {
+    width: 80%;
+}
+
+.comment-form button {
+    padding: 5px 15px;
+}
+
+.comment-form button:hover {
+    background-color: rgb(221, 240, 252);
+}
 

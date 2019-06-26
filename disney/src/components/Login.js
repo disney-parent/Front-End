@@ -29,6 +29,7 @@ class Login extends React.Component {
             password: "",
             accountType: ""
         })
+        this.props.history.push('/');
     }
     render(){
         return (

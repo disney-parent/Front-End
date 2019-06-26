@@ -29,6 +29,7 @@ class Register extends React.Component {
             email: "",
             accountType: ''
         })
+        this.props.history.push('/login');
     }
 
     render(){

@@ -14,6 +14,9 @@ import {
     FETCH_COMMENT_START,
     FETCH_COMMENT_SUCCESS,
     FETCH_COMMENT_FAILURE,
+    COMMENT_START,
+    COMMENT_SUCCESS,
+    COMMENT_FAILURE,
     } from "../actions"
   
   const initialState = {
@@ -21,7 +24,7 @@ import {
      comments:[],
      loggingIn: false,
      error: null,
-     username:""
+     username: ""
    }
 const disneyReducer = (state = initialState , action) => {
     switch (action.type) {
@@ -114,6 +117,25 @@ const disneyReducer = (state = initialState , action) => {
             }
         } 
         case FETCH_COMMENT_FAILURE: {
+            return {
+                ...state,
+                error: action.payload
+            }
+        }
+        case COMMENT_START: {
+            return {
+                ...state,
+                error: ""
+            }
+        } 
+        case COMMENT_SUCCESS: {
+            return {
+                ...state,
+                error: "",
+                comments: action.payload
+            }
+        } 
+        case COMMENT_FAILURE: {
             return {
                 ...state,
                 error: action.payload
