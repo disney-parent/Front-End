@@ -130,3 +130,41 @@ export const fetchPosts = () => dispatch => {
     )
 
 }
+
+
+export const DELETE_START = "DELETE_START";
+export const DELETE_SUCCESS = "DELETE_SUCCESS";
+export const DELETE_FAILURE = "DELETE_FAILURE";
+
+export const deletePost = id => dispatch => {
+    dispatch({ type: DELETE_START});
+    return (
+        axios    
+            .delete(`https://disneyparent-backend.herokuapp.com/posts/${id}`)
+            .then(res => {
+                dispatch({ type: DELETE_SUCCESS, payload: res.data })
+            })
+            .catch(err => {
+                dispatch({ type: DELETE_FAILURE, payload: err})            
+            })
+
+    )}
+
+export const UPDATE_POST_START = "UPDATE_POST_START";
+export const UPDATE_POST_SUCCESS = "UPDATE_POST_SUCCESS";
+export const UPDATE_POST_FAILURE = "UPDATE_POST_FAILURE";
+
+export const updatePost = (id, updatedPost) => dispatch => {
+    dispatch({ type: UPDATE_POST_START });
+    return (
+        axios
+            .put(`https://disneyparent-backend.herokuapp.com/posts/${id}`, updatedPost)
+            .then (res => {
+                dispatch({ type: UPDATE_POST_SUCCESS, payload: res.data })
+            })
+            .catch(err => {
+                dispatch({ type: UPDATE_POST_FAILURE, payload: err}) 
+                // console.log(err)           
+            })
+    )
+}
