@@ -154,17 +154,17 @@ export const UPDATE_POST_START = "UPDATE_POST_START";
 export const UPDATE_POST_SUCCESS = "UPDATE_POST_SUCCESS";
 export const UPDATE_POST_FAILURE = "UPDATE_POST_FAILURE";
 
-export const updatePost = id => dispatch => {
+export const updatePost = (id, updatedPost) => dispatch => {
     dispatch({ type: UPDATE_POST_START });
     return (
         axios
-            .put(`https://disneyparent-backend.herokuapp.com/post/${id}`)
+            .put(`https://disneyparent-backend.herokuapp.com/posts/${id}`, updatedPost)
             .then (res => {
                 dispatch({ type: UPDATE_POST_SUCCESS, payload: res.data })
-            .catch(err => {
-                dispatch({ type: UPDATE_POST_FAILURE, payload: err})            
             })
-        
+            .catch(err => {
+                dispatch({ type: UPDATE_POST_FAILURE, payload: err}) 
+                // console.log(err)           
             })
     )
 }

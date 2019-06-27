@@ -25,24 +25,35 @@ class Comments extends React.Component {
         })
     }
 
+    reload = () => {
+        setTimeout(() => window.location.reload(), 500)
+        }
+
     postComment = e => {
         e.preventDefault();
-
+        e.persist();
         const newComment = { 
             username: localStorage.getItem("username"),
             comment: this.state.comment,
             post_id: this.state.id
         }
+        this.setState({
+            ...this.state,
+            comments:[...this.state.comments, newComment]
+        })
 
         this.props.postComment(newComment);
         this.setState({
+            ...this.state,
             comment: ''
         })
+        this.reload()
     }
 
     deletePost = e => {
         e.preventDefault();
         this.props.deletePost(this.state.id)
+        setTimeout(() => this.props.history.push("/"), 500)
     }
 
     render(){
@@ -56,9 +67,6 @@ class Comments extends React.Component {
        `${post.id}` === id )
         
     const comments=this.props.comments.filter(comments => `${comments.post_id}` === id)
-
-    // const test = [1 ,2, 3]
-    // console.log("Hey Jamie, comment:", comments)
 
     if (!post){
         return(

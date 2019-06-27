@@ -135,11 +135,14 @@ const disneyReducer = (state = initialState , action) => {
             }
         } 
         case COMMENT_SUCCESS: {
-            return {
-                ...state,
-                error: "",
-                comments: action.payload
-            }
+            console.log("COMMENT PAYLOAD", action.payload)
+            state.comments.push(action.payload)
+            return state
+            // return {
+            //     ...state,
+            //     // error: "",
+            //     // comments: action.payload
+            // }
         } 
         case COMMENT_FAILURE: {
             return {
@@ -157,7 +160,7 @@ const disneyReducer = (state = initialState , action) => {
             return {
                 ...state,
                 error: "",
-                posts: action.payload
+                posts: state.posts.filter(post => post.id !== action.payload.id)
             }
         } 
         case DELETE_FAILURE: {
@@ -173,10 +176,16 @@ const disneyReducer = (state = initialState , action) => {
             }
         } 
         case UPDATE_POST_SUCCESS: {
+            // console.log("ACTION PAYLOAD", action.payload.updatedPostInfo)
             return {
                 ...state,
                 error: "",
-                posts: action.payload
+                posts: state.posts.map(post => {
+                    if(post.id === action.payload.updatedPostInfo.id){
+                        return post = action.payload.updatedPostInfo
+                    }
+                    return post
+                })
             }
         } 
         case UPDATE_POST_FAILURE: {

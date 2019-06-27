@@ -4,7 +4,6 @@
     padding-bottom: 25px;
     border-bottom: 2px solid rgb(161, 161, 161);
 }
-
 .input-form {
     display: flex;
     flex: column wrap;
@@ -33,10 +32,15 @@ input {
     margin-right: 10px;
     display: flex;
     flex: row;
+    align-items: center;
 }
 
 .nav-bar-right div {
-    padding: 0 10px;
+    margin: 0 10px;
+}
+
+.searchBar input {
+    width: 200px;
 }
 
 .post {
@@ -47,6 +51,12 @@ input {
     background-color: rgb(221, 240, 252);
     color: black;
     text-decoration: none;
+}
+
+.post button {
+    margin-bottom: 20px;
+    padding: 3px 8px;
+    border-radius: 5px;
 }
 
 .post-form button {
