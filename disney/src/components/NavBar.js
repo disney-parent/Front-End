@@ -34,8 +34,8 @@ class NavBar extends React.Component {
                 <Link to="/"><img src={DisneyParentLogo} alt="Logo"/></Link></div>
 
                 <div className="nav-bar-right">
-                    <div><Link to="/login">Login</Link></div>
-                    <div><Link to="/register">Register</Link></div>
+                    <div><Link to="/login">LOGIN</Link></div>
+                    <div><Link to="/register">REGISTER</Link></div>
                     <div className="searchBar">
                         <form
                             onSubmit={this.searchPost}>
