@@ -20,10 +20,23 @@ input {
 .nav-bar {
     height: 15%;
     margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav-bar img {
     width: 250px;
+}
+
+.nav-bar-right {
+    margin-right: 10px;
+    display: flex;
+    flex: row;
+}
+
+.nav-bar-right div {
+    padding: 0 10px;
 }
 
 .post {
@@ -60,6 +73,13 @@ input {
     flex: row;
     margin-left: 8px;
 }
+
+.comments-post button {
+    margin-bottom: 20px;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
 .username {
     font-weight: bold;
     margin-right: 20px;
@@ -82,3 +102,6 @@ input {
     background-color: rgb(221, 240, 252);
 }
 
+a {
+    color: black;
+}

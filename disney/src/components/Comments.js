@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux";
-import { fetchPosts, fetchComments, postComment } from "../actions";
+import { fetchPosts, fetchComments, postComment, deletePost } from "../actions";
 import Castle from "./Castle.jpg";
 // import { Link } from "react-router-dom";
 
@@ -18,7 +18,7 @@ class Comments extends React.Component {
         this.props.fetchPosts()
         this.props.fetchComments()
     }
-    
+
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value 
@@ -40,6 +40,11 @@ class Comments extends React.Component {
         })
     }
 
+    deletePost = e => {
+        e.preventDefault();
+        this.props.deletePost(this.state.id)
+    }
+
     render(){
     
     console.log("Hi this is username:", this.props.username)
@@ -47,7 +52,8 @@ class Comments extends React.Component {
 
     const id = this.props.match.params.id;
 
-    const post= this.props.posts.find(post=> `${post.id}` === id)
+    const post= this.props.posts.find(post => 
+       `${post.id}` === id )
         
     const comments=this.props.comments.filter(comments => `${comments.post_id}` === id)
 
@@ -66,10 +72,13 @@ class Comments extends React.Component {
 
                
                         <div className ="comments-post">
-                            <h3>{post.title}</h3>
-                            <h5>@ {post.attraction}</h5>
-                            <h6>{post.time}</h6>
-                            <h6>{post.children} kids</h6>
+                            <h2>{post.title}</h2>
+                            <h4>@ {post.attraction}</h4>
+                            <h5>{post.time}</h5>
+                            <h5>{post.children} kids</h5>
+                            <button
+                                onClick={this.deletePost}>X</button>
+                            
                         </div>
 
                         {comments.map(commentObj => (
@@ -108,4 +117,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchPosts, fetchComments, postComment })(Comments)
+export default connect(mapStateToProps, { fetchPosts, fetchComments, postComment, deletePost })(Comments)

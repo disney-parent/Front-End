@@ -25,6 +25,9 @@ class App extends React.Component {
       <Route exact path = "/register" component={Register} />
       <Route exact path = "/" component={Content}/>
       <Route exact path = "/posts/:id" component={Comments} />
+      <footer>
+        <h5>&copy; Disney Parent </h5>
+      </footer>
 
     </div>
   );

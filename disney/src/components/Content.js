@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchPosts, postPost, fetchComments } from "../actions";
 import Castle from "./Castle.jpg";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 
@@ -44,14 +45,17 @@ class Content extends React.Component {
                 <img src={Castle} alt="Disney Castle" />
 
                 {this.props.posts.map(post => (
-                    <Link to={`/posts/${post.id}`}>
                         <div className ="post">
-                            <h3>{post.title}</h3>
-                            <h5>@ {post.attraction}</h5>
-                            <h6>{post.time}</h6>
-                            <h6>{post.children} kids</h6>
+                            <Link to={`/posts/${post.id}`}>
+                                <div>
+                                    <h2>{post.title}</h2>
+                                    <h4>@ {post.attraction}</h4>
+                                    <h5>{post.time}</h5>
+                                    <h5>{post.children} kids</h5> 
+                                </div>
+                            </Link>
                         </div>
-                    </Link>
+
 
                 ))}
 
@@ -94,4 +98,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {fetchPosts, postPost, fetchComments})(Content)
+export default connect(mapStateToProps, { fetchPosts, postPost, fetchComments })(Content)

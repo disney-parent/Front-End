@@ -17,7 +17,13 @@ import {
     COMMENT_START,
     COMMENT_SUCCESS,
     COMMENT_FAILURE,
-    } from "../actions"
+    DELETE_START,
+    DELETE_SUCCESS,
+    DELETE_FAILURE,
+    UPDATE_POST_START,
+    UPDATE_POST_SUCCESS,
+    UPDATE_POST_FAILURE,
+        } from "../actions"
   
   const initialState = {
      posts:[],
@@ -140,7 +146,45 @@ const disneyReducer = (state = initialState , action) => {
                 ...state,
                 error: action.payload
             }
-        }           
+        }
+        case DELETE_START: {
+            return {
+                ...state,
+                error: ""
+            }
+        } 
+        case DELETE_SUCCESS: {
+            return {
+                ...state,
+                error: "",
+                posts: action.payload
+            }
+        } 
+        case DELETE_FAILURE: {
+            return {
+                ...state,
+                error: action.payload
+            }
+        }
+        case UPDATE_POST_START: {
+            return {
+                ...state,
+                error: ""
+            }
+        } 
+        case UPDATE_POST_SUCCESS: {
+            return {
+                ...state,
+                error: "",
+                posts: action.payload
+            }
+        } 
+        case UPDATE_POST_FAILURE: {
+            return {
+                ...state,
+                error: action.payload
+            }
+        }                    
       default:
           return state;
   }
